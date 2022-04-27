@@ -50,6 +50,58 @@ Installation:
 
 in 'qb-core/client/functions.lua'
 
+function QBCore.Functions.RequestAnimDict(animDict)
+	if not HasAnimDictLoaded(animDict) then
+		RequestAnimDict(animDict)
+
+		while not HasAnimDictLoaded(animDict) do
+			Wait(4)
+		end
+	end
+end
+
+QBCore.Functions.LoadAnimDict = function(dict)
+	while (not HasAnimDictLoaded(dict)) do RequestAnimDict(dict) Citizen.Wait(5); end
+end
+
+QBCore.Functions.RemoveAnimDict = function(dict)
+	RemoveAnimDict(dict)
+end
+
+QBCore.Functions.VehicleInFront = function()
+    local pos = GetEntityCoords(PlayerPedId())
+    local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 3.0, 0.0)
+    local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, PlayerPedId(), 0)
+    local a, b, c, d, result = GetRaycastResult(rayHandle)
+    return result
+end
+
+QBCore.Functions.GetClosestPlayerRadius = function(radius)
+    local players = QBCore.Functions.GetPlayers()
+    local closestDistance = -1
+    local closestPlayer = -1
+    local ply = PlayerPedId()
+    local plyCoords = GetEntityCoords(ply)
+
+    for index,value in ipairs(players) do
+        local target = GetPlayerPed(value)
+        if(target ~= ply) then
+            local targetCoords = GetEntityCoords(GetPlayerPed(value), 0)
+            local distance = #(targetCoords - plyCoords)
+            if(closestDistance == -1 or closestDistance > distance) then
+                closestPlayer = value
+                closestDistance = distance
+            end
+        end
+    end
+	print("closest player is dist: " .. tostring(closestDistance))
+	if closestDistance ~= -1 and closestDistance <= radius then
+		return closestPlayer
+	else
+		return nil
+	end
+end
+
 function PersistentAlert(action, id, ttype, text, style)
 	if ttype == 'inform' then ttype = 'primary'; end
 	QBCore.Functions.PersistentNotify(action, id, text, ttype, style)
