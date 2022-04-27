@@ -6,15 +6,24 @@ All .lua's in client should go into the client folder in 'qb-smallresources'.
 
 All .lua's in server should go into the server folder in 'qb-smallresources'
 
+
+
+
 bin.lua
 
 This gives players the ability to hide in bins using qb-target.
+
+
+
 
 btf.lua
 
 This gives players the ability to 'travel back to the future' (to a waypoint) using a deluxo at 88mph. It will leave particles as you teleport.
 
 Commands: /btf
+
+
+
 
 practiselaptop.lua
 
@@ -23,6 +32,9 @@ This gives players the ability to 'practise' the bank hacks using a laptop item.
 in 'qb-core/shared/items.lua'
 
 ["practicelaptop"] 		 	 	 = {["name"] = "practicelaptop",           		["label"] = "Practice Laptop",	 		["weight"] = 2500, 		["type"] = "item", 		["image"] = "boostinglaptop.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = "A laptop"},
+
+
+
 
 trunk.lua
 
