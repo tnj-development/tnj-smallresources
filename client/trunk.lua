@@ -33,10 +33,10 @@ end
 
 local trunkVeh = nil
 local inTrunk = false
-RegisterCommand("git", function() TriggerEvent('gameplay:getintrunk'); end)
+RegisterCommand("git", function() TriggerEvent('tnj-smallresources:getintrunk'); end)
 TriggerEvent("chat:addSuggestion", "/git", 'Get in the trunk of closest vehicle (Get in trunk)')
 
-AddEventHandler('gameplay:getintrunk', function()
+AddEventHandler('tnj-smallresources:getintrunk', function()
     local veh = QBCore.Functions.VehicleInFront()
     if veh == 0 then QBCore.Functions.Notify("No vehicle found",'error') return; end
     local lockStatus = GetVehicleDoorLockStatus(veh)
@@ -51,10 +51,10 @@ AddEventHandler('gameplay:getintrunk', function()
     putinTrunk(veh)
 end)
 
-RegisterCommand("pit", function() TriggerEvent('gameplay:putintrunk'); end)
+RegisterCommand("pit", function() TriggerEvent('tnj-smallresources:putintrunk'); end)
 TriggerEvent("chat:addSuggestion", "/pit", 'Put person in trunk (Put in trunk)')
 
-AddEventHandler('gameplay:putintrunk', function()
+AddEventHandler('tnj-smallresources:putintrunk', function()
     local closestPlayer = QBCore.Functions.GetClosestPlayerRadius(3)
     if closestPlayer then
         local closestPed = GetPlayerPed(closestPlayer)
@@ -70,7 +70,7 @@ AddEventHandler('gameplay:putintrunk', function()
             return
         end
 		--StopLift()
-		TriggerServerEvent("qb_gameplay:requestTrunk", GetPlayerServerId(closestPlayer), veh, false)
+		TriggerServerEvent("tnj-smallresources:requestTrunk", GetPlayerServerId(closestPlayer), veh, false)
     else
         QBCore.Functions.Notify("No person nearby",'error')
     end
@@ -79,7 +79,7 @@ end)
 RegisterCommand("dot", function() TriggerEvent('dragouttrunk'); end)
 TriggerEvent("chat:addSuggestion", "/dot", 'Drag person out of trunk (Drag out trunk)')
 
-AddEventHandler('gameplay:dragouttrunk', function()
+AddEventHandler('tnj-smallresources:dragouttrunk', function()
     local closestPlayer = QBCore.Functions.GetClosestPlayerRadius(3)
     if closestPlayer then
         local veh = QBCore.Functions.VehicleInFront()
@@ -93,14 +93,14 @@ AddEventHandler('gameplay:dragouttrunk', function()
             QBCore.Functions.Notify("The trunk is closed",'error')
             return
         end
-        TriggerServerEvent("qb_gameplay:requestTrunk", GetPlayerServerId(closestPlayer), false, true)
+        TriggerServerEvent("tnj-smallresources:requestTrunk", GetPlayerServerId(closestPlayer), false, true)
     else
         QBCore.Functions.Notify("No person nearby",'error')
     end
 end)
 
-RegisterNetEvent('qb_gameplay:handleTrunk')
-AddEventHandler('qb_gameplay:handleTrunk', function(veh)
+RegisterNetEvent('tnj-smallresources:handleTrunk')
+AddEventHandler('tnj-smallresources:handleTrunk', function(veh)
     if veh then
         putinTrunk()
     else
@@ -169,7 +169,7 @@ function putinTrunk(veh)
 				else
 					Citizen.Wait(0)
 					if IsControlJustReleased(0, 74) then
-						TriggerServerEvent("gameplay:server:toggleTrunkDoor",VehToNet(veh))
+						TriggerServerEvent("tnj-smallresources:server:toggleTrunkDoor",VehToNet(veh))
 					end
 
 					if IsControlJustReleased(0, 23) then
@@ -208,8 +208,8 @@ function putinTrunk(veh)
 	end
 end
 
-RegisterNetEvent("gameplay:client:toggleTrunkDoor")
-AddEventHandler("gameplay:client:toggleTrunkDoor", function(veh)
+RegisterNetEvent("tnj-smallresources:client:toggleTrunkDoor")
+AddEventHandler("tnj-smallresources:client:toggleTrunkDoor", function(veh)
 	local veh = NetToVeh(veh)
 	if GetVehicleDoorAngleRatio(veh, 5) > 0.0 then
 		SetVehicleDoorShut(veh, 5, false)

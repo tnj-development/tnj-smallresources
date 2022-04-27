@@ -1,32 +1,32 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
 local ffires = {}
-RegisterNetEvent('utils:btf')
-AddEventHandler("utils:btf", function()
+RegisterNetEvent('tnj-smallresources:btf')
+AddEventHandler("tnj-smallresources:btf", function()
     QBCore.Functions.Notify("Let's go back to the future! Get to 88MPH.", "success") -- [text] = message, [type] = primary | error | success, [length] = time till fadeout.
 	Citizen.CreateThread(function()
 		while GetEntitySpeed(GetVehiclePedIsIn(PlayerPedId(), true)) * 2.236936 < 88 do
 			Wait(50)
 		end
-		
+
 		local count = 0
-		
+
 		while count < 60 do
 			if count == 44 then
-				TriggerServerEvent("TBH:SyncAll", "TBH:EndBtf", GetEntityCoords(PlayerPedId()))
+				TriggerServerEvent("tnj-smallresources:SyncAll", "tnj-smallresources:EndBtf", GetEntityCoords(PlayerPedId()))
 			end
 			Wait(10)
 			SetEntityInvincible(PlayerPedId(), true)
 			local x, y, z = table.unpack(GetOffsetFromEntityInWorldCoords(PlayerPedId(), -1.0, -1.0, 0.0))
-			
+
 			--table.insert(fires, StartScriptFire(x, y, z, 1, true))
 			--table.insert(fires, StartScriptFire(x2, y2, z2, 1, true))
-			TriggerServerEvent("TBH:SyncAll", "TBH:SyncFire", {x, y, z})
+			TriggerServerEvent("tnj-smallresources:SyncAll", "tnj-smallresources:SyncFire", {x, y, z})
 			x, y, z = table.unpack(GetOffsetFromEntityInWorldCoords(PlayerPedId(), 1.0, -1.0, 0.0))
-			TriggerServerEvent("TBH:SyncAll", "TBH:SyncFire", {x, y, z})
+			TriggerServerEvent("tnj-smallresources:SyncAll", "tnj-smallresources:SyncFire", {x, y, z})
 			count = count + 2
 		end
-		
+
 		local WaypointHandle = GetFirstBlipInfoId(8)
 
         if DoesBlipExist(WaypointHandle) then
@@ -49,8 +49,8 @@ AddEventHandler("utils:btf", function()
 	end)
 end)
 
-RegisterNetEvent("TBH:EndBtf")
-AddEventHandler("TBH:EndBtf", function(x, y, z)
+RegisterNetEvent("tnj-smallresources:EndBtf")
+AddEventHandler("tnj-smallresources:EndBtf", function(x, y, z)
 	ForceLightningFlash()
 	local plyPos = GetEntityCoords(PlayerPedId())
 	if GetDistanceBetweenCoords(x, y, z, plyPos.x, plyPos.y, plyPos.z) < 100 then
@@ -78,8 +78,8 @@ AddEventHandler("TBH:EndBtf", function(x, y, z)
 	end
 end)
 
-RegisterNetEvent("TBH:SyncFire")
-AddEventHandler("TBH:SyncFire", function(x, y, z)
+RegisterNetEvent("tnj-smallresources:SyncFire")
+AddEventHandler("tnj-smallresources:SyncFire", function(x, y, z)
 	if #ffires > 20 then
 		RemoveScriptFire(table.remove(ffires, 1))
 	end

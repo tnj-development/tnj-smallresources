@@ -1,7 +1,7 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
-RegisterServerEvent("TBH:SyncAll")
-AddEventHandler("TBH:SyncAll", function(event, args)
+RegisterServerEvent("tnj-smallresources:SyncAll")
+AddEventHandler("tnj-smallresources:SyncAll", function(event, args)
 	if args ~= nil then
 		TriggerClientEvent(event, -1, table.unpack(args))
 	else
@@ -10,5 +10,5 @@ AddEventHandler("TBH:SyncAll", function(event, args)
 end)
 
 QBCore.Commands.Add("btf", "BTF", {}, false, function(source, args)
-    TriggerClientEvent("utils:btf", source)
+    TriggerClientEvent("tnj-smallresources:btf", source)
 end, "god")
