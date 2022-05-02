@@ -4,7 +4,8 @@ In this resource are some standalone addons which you can add to the current 'qb
 
 ```All .lua's in client should go into the client folder in 'qb-smallresources'.
 
-All .lua's in server should go into the server folder in 'qb-smallresources'```
+All .lua's in server should go into the server folder in 'qb-smallresources'
+```
 
 
 
