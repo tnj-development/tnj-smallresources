@@ -125,3 +125,27 @@ QBCore.Functions.PersistentNotify = function(action, id, text, textype, style)
 		})
 	end
 end
+
+QB TARGET
+
+Config.TargetModels = {
+	["BIN"] = {
+        models = {
+            "prop_dumpster_01a", 
+            "prop_dumpster_02a", 
+            "prop_dumpster_02b", 
+            "prop_dumpster_4a", 
+            "prop_dumpster_4b",
+        },
+        options = {
+            {
+                type = "client",
+                event = "dcrp-dumpsters:getInBin",
+                
+                icon = "fa-solid fa-dumpster",
+                label = "Hide In Bin",
+            },
+        },
+        distance = 3.0
+    },
+}
