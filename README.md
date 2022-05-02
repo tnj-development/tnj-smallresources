@@ -19,8 +19,10 @@ This gives players the ability to hide in bins using qb-target.
 btf.lua
 ```
 This gives players the ability to 'travel back to the future' (to a waypoint) using a deluxo at 88mph. It will leave particles as you teleport.
-
-Commands: /btf
+```
+Commands:
+```
+/btf
 ```
 
 
