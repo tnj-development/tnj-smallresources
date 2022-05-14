@@ -76,7 +76,7 @@ AddEventHandler('tnj-smallresources:putintrunk', function()
     end
 end)
 
-RegisterCommand("dot", function() TriggerEvent('dragouttrunk'); end)
+RegisterCommand("dot", function() TriggerEvent('tnj-smallresources:dragouttrunk'); end)
 TriggerEvent("chat:addSuggestion", "/dot", 'Drag person out of trunk (Drag out trunk)')
 
 AddEventHandler('tnj-smallresources:dragouttrunk', function()
